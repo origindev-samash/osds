@@ -49,6 +49,9 @@ Everything else is a later release.
   credentials. The wizard and the Storage settings page probe before saving and
   refuse a failing config; the backend cannot be switched once media exists.
   Each cloud SDK is a human-gated dependency added with its backend PR (#150)
+  - GCP: `google-cloud-storage` is pinned and the backend is implemented, with
+    its tests running the real storage class against a mocked client; it has not
+    been run against live GCS or a GCS emulator
 - CSV import, worker-processed, with batch rollback
 - Claims: manual review and email OTP, consent capture, anti-hijack
   notification, dispute queue
