@@ -819,6 +819,7 @@ def import_detail(request, public_id):
             "batch": batch,
             "rows": rows,
             "targets": csv_import.allowed_targets(batch.listing_type),
+            "generate_slug_label": csv_import.GENERATE_SLUG_LABEL,
             "can_map": can_map,
             "can_rollback": can_rollback,
             "rollback_window_passed": window_passed,
@@ -849,17 +850,20 @@ def import_mapping(request, public_id):
             header: request.POST.get(f"map__{i}", "")
             for i, header in enumerate(batch.detected_headers or [])
         }
+        generate_slug = request.POST.get("generate_slug") == "on"
         try:
             cleaned = csv_import.validate_mapping(
                 submitted,
                 headers=batch.detected_headers or [],
                 listing_type=batch.listing_type,
+                generate_slug=generate_slug,
             )
         except csv_import.MappingError as exc:
             messages.error(request, str(exc))
         else:
             batch.column_mapping = cleaned
-            batch.save(update_fields=["column_mapping"])
+            batch.generate_slug = generate_slug
+            batch.save(update_fields=["column_mapping", "generate_slug"])
             messages.success(request, "Column mapping saved.")
     return redirect("directory_admin:import-detail", public_id=public_id)
 

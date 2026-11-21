@@ -280,6 +280,9 @@ class ImportBatch(models.Model):
     encoding = models.CharField(max_length=32, default="utf-8-sig")
     has_header = models.BooleanField(default=True)
     column_mapping = models.JSONField(default=dict, blank=True)
+    # The operator chose "Generate slug from name": no column is the slug, each
+    # row's slug is derived from its name, and those rows only ever create.
+    generate_slug = models.BooleanField(default=False)
     row_count = models.PositiveIntegerField(default=0)
     # Resume cursor for the chunked worker row loop: data rows consumed so far.
     # A pass processes the next ``ROWS_PER_PASS`` rows and advances this.
