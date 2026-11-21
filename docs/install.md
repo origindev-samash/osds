@@ -314,8 +314,9 @@ is no stable upgrade promise between releases.
 
 - Switching a tenant's storage backend once it has media or imports is
   blocked: files live in the current backend and the copy/migration tool is a
-  post-alpha item. Choose the backend before uploading anything. The SDK
-  packages for the cloud backends (`boto3`, `azure-storage-blob`,
+  post-alpha item. Choose the backend before uploading anything. The Azure
+  backend is implemented and its SDK (`azure-storage-blob`) is installed with
+  the image. The SDK packages for the other cloud backends (`boto3`,
   `google-cloud-storage`) are not in the default image; a tenant that selects
   one without its SDK is shown a misconfiguration banner and the save is
   refused by the probe.

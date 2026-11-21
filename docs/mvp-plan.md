@@ -48,7 +48,8 @@ Everything else is a later release.
   GCP through a backend registry (`directory/storage.py`) with stored-key
   credentials. The wizard and the Storage settings page probe before saving and
   refuse a failing config; the backend cannot be switched once media exists.
-  Each cloud SDK is a human-gated dependency added with its backend PR (#150)
+  Each cloud SDK is a human-gated dependency added with its backend PR (#150);
+  the Azure backend is implemented, with `azure-storage-blob` pinned
 - CSV import, worker-processed, with batch rollback
 - Claims: manual review and email OTP, consent capture, anti-hijack
   notification, dispute queue
@@ -209,8 +210,8 @@ Planned, specified, and designed not to be designed out (see "Out, and
 planned" above). Nothing here is in the alpha.
 
 - **Object storage, remaining.** The registry, probe and settings page exist;
-  each backend's SDK pin lands in its own PR (#150), and a `minio` service joins
-  the compose file with the S3 one. The backend-copy/migration tool is a
+  each backend's SDK pin lands in its own PR (#150) — Azure's has landed — and
+  a `minio` service joins the compose file with the S3 one. The backend-copy/migration tool is a
   separate post-alpha issue; until then a switch is blocked once media exists.
 - **Featured slots** — the first post-launch addition. A tier with `uses_slot`
   is refused today.
